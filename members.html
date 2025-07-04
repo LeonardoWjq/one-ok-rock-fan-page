@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Band Members - One Ok Rock Fan Page</title>
+    <style>
+        :root {
+            --primary-color: #e63946;
+            --secondary-color: #1d3557;
+            --light-color: #f1faee;
+            --dark-color: #2b2d42;
+            --accent-color: #457b9d;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #121212;
+            color: var(--light-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background-color: rgba(0, 0, 0, 0.8);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .logo:hover {
+            transform: scale(1.05);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 20px;
+        }
+        
+        .nav-links a {
+            color: var(--light-color);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 15px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-color);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-links a.active {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+        
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background-color: var(--light-color);
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        main {
+            padding-top: 100px;
+            min-height: 100vh;
+        }
+        
+        .page-title {
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            margin: 40px 0 20px;
+            color: var(--accent-color);
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 10px;
+        }
+        
+        .members-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .member-card {
+            background: linear-gradient(145deg, #1a1a1a, #2a2a2a);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .member-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+        
+        .member-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-bottom: 3px solid var(--primary-color);
+        }
+        
+        .member-info {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .member-name {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+        
+        .member-role {
+            font-size: 1rem;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+        
+        .member-bio {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+        
+        .former-members {
+            background-color: rgba(29, 53, 87, 0.2);
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 50px;
+        }
+        
+        .former-member {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .former-member:last-child {
+            border-bottom: none;
+        }
+        
+        .former-name {
+            font-size: 1.2rem;
+            color: var(--light-color);
+        }
+        
+        .former-role {
+            color: var(--accent-color);
+        }
+        
+        footer {
+            background-color: var(--dark-color);
+            color: var(--light-color);
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 50px;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin: 15px 0;
+        }
+        
+        .social-links li {
+            margin: 0 10px;
+        }
+        
+        .social-links a {
+            color: var(--light-color);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            color: var(--primary-color);
+            transform: scale(1.2);
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--primary-color);
+            color: var(--light-color);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 99;
+        }
+        
+        .back-to-top.show {
+            opacity: 1;
+        }
+        
+        .back-to-top:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-5px);
+        }
+        
+        @media screen and (max-width: 768px) {
+            .nav-links {
+                position: absolute;
+                right: 0;
+                top: 70px;
+                background-color: rgba(0, 0, 0, 0.9);
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                transform: translateX(100%);
+                transition: transform 0.5s ease-in;
+                z-index: 99;
+            }
+            
+            .nav-links.active {
+                transform: translateX(0%);
+            }
+            
+            .nav-links li {
+                margin: 0;
+                opacity: 0;
+            }
+            
+            .nav-links a {
+                display: block;
+                padding: 15px;
+                text-align: center;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            
+            .hamburger {
+                display: block;
+            }
+            
+            .members-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .former-member {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .former-role {
+                margin-top: 5px;
+            }
+        }
+        
+        @keyframes navLinkFade {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0px);
+            }
+        }
+        
+        .toggle .line1 {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+        
+        .toggle .line2 {
+            opacity: 0;
+        }
+        
+        .toggle .line3 {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">ONE OK ROCK</a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="discography.html">Discography</a></li>
+                    <li><a href="members.html" class="active">Members</a></li>
+                    <li><a href="tours.html">Tours</a></li>
+                    <li><a href="media.html">Media</a></li>
+                    <li><a href="about.html">About</a></li>
+                </ul>
+                <div class="hamburger">
+                    <div class="line1"></div>
+                    <div class="line2"></div>
+                    <div class="line3"></div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1 class="page-title">Meet the Band</h1>
+
+        <section>
+            <h2 class="section-title">Current Members</h2>
+            <div class="members-grid">
+                <div class="member-card">
+                    <img src="https://via.placeholder.com/400x300?text=Taka" alt="Taka" class="member-img">
+                    <div class="member-info">
+                        <h3 class="member-name">Taka (Takahiro Moriuchi)</h3>
+                        <p class="member-role">Lead Vocals</p>
+                        <p class="member-bio">Taka has been the vocalist since the band's formation in 2005. Known for his powerful and versatile voice, he can effortlessly switch between melodic singing and intense screams. His emotional delivery and stage presence have made him one of the most recognizable vocalists in the Japanese rock scene.</p>
+                    </div>
+                </div>
+
+                <div class="member-card">
+                    <img src="https://via.placeholder.com/400x300?text=Toru" alt="Toru" class="member-img">
+                    <div class="member-info">
+                        <h3 class="member-name">Toru (Toru Yamashita)</h3>
+                        <p class="member-role">Guitarist and Leader</p>
+                        <p class="member-bio">Toru is a founding member from 2005 and serves as the band's leader. His guitar skills and songwriting abilities have been instrumental in shaping ONE OK ROCK's distinctive sound. As the band's leader, he has guided their evolution from a local Japanese act to an internationally recognized rock band.</p>
+                    </div>
+                </div>
+
+                <div class="member-card">
+                    <img src="https://via.placeholder.com/400x300?text=Ryota" alt="Ryota" class="member-img">
+                    <div class="member-info">
+                        <h3 class="member-name">Ryota (Kohama Ryota)</h3>
+                        <p class="member-role">Bassist</p>
+                        <p class="member-bio">Ryota has been with the band since 2005. His energetic bass lines provide the foundation for ONE OK ROCK's dynamic sound. Known for his enthusiastic stage presence and technical skill, Ryota brings both musical depth and visual energy to the band's performances.</p>
+                    </div>
+                </div>
+
+                <div class="member-card">
+                    <img src="https://via.placeholder.com/400x300?text=Tomoya" alt="Tomoya" class="member-img">
+                    <div class="member-info">
+                        <h3 class="member-name">Tomoya (Kanki Tomoya)</h3>
+                        <p class="member-role">Drummer</p>
+                        <p class="member-bio">Tomoya joined the band in 2006. His powerful and precise drumming has become a cornerstone of ONE OK ROCK's sound. With his technical proficiency and ability to drive the band's rhythm section, Tomoya has established himself as one of the most respected drummers in the Japanese rock scene.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="former-members">
+            <h2 class="section-title">Former Members</h2>
+            <div class="former-member">
+                <h3 class="former-name">Alex (Alexander Reimon Onizawa)</h3>
+                <p class="former-role">Guitar (2005–2009)</p>
+            </div>
+            <div class="former-member">
+                <h3 class="former-name">Yu (Yu Koyanagi)</h3>
+                <p class="former-role">Drums (2005–2006)</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© 2023 ONE OK ROCK Fan Page. This is an unofficial fan site.</p>
+            <ul class="social-links">
+                <li><a href="#" aria-label="Facebook">📱</a></li>
+                <li><a href="#" aria-label="Twitter">🐦</a></li>
+                <li><a href="#" aria-label="Instagram">📷</a></li>
+                <li><a href="#" aria-label="YouTube">▶️</a></li>
+            </ul>
+            <p>Created with ❤️ by fans, for fans</p>
+        </div>
+    </footer>
+
+    <div class="back-to-top" id="backToTop">↑</div>
+
+    <script>
+        // Mobile Navigation
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        const links = document.querySelectorAll('.nav-links li');
+
+        hamburger.addEventListener('click', () => {
+            // Toggle Nav
+            navLinks.classList.toggle('active');
+            
+            // Animate Links
+            links.forEach((link, index) => {
+                if (link.style.animation) {
+                    link.style.animation = '';
+                } else {
+                    link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`;
+                }
+            });
+            
+            // Hamburger Animation
+            hamburger.classList.toggle('toggle');
+        });
+
+        // Back to Top Button
+        const backToTopButton = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('show');
+            } else {
+                backToTopButton.classList.remove('show');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Add smooth scrolling to all links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Add animation to member cards on scroll
+        const memberCards = document.querySelectorAll('.member-card');
+        
+        const observerOptions = {
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        memberCards.forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(50px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
