@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ONE OK ROCK - Tours</title>
+    <style>
+        :root {
+            --primary-color: #1a1a1a;
+            --secondary-color: #2d2d2d;
+            --accent-color: #e74c3c;
+            --text-color: #f5f5f5;
+            --hover-color: #ff6b6b;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        
+        nav ul li a:hover {
+            color: var(--hover-color);
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--hover-color);
+            transition: width 0.3s ease;
+        }
+        
+        .active {
+            color: var(--accent-color);
+        }
+        
+        .active::after {
+            width: 100%;
+            background-color: var(--accent-color);
+        }
+        
+        .hero {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://source.unsplash.com/random/1600x900/?concert');
+            background-size: cover;
+            background-position: center;
+            height: 50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin-top: 60px;
+        }
+        
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero-content p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        main {
+            padding: 2rem 0;
+        }
+        
+        section {
+            margin-bottom: 3rem;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-color);
+            position: relative;
+            display: inline-block;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 3px;
+            bottom: -10px;
+            left: 0;
+            background-color: var(--accent-color);
+        }
+        
+        .tour-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.5rem;
+            background-color: var(--secondary-color);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .tour-table th, .tour-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #444;
+        }
+        
+        .tour-table th {
+            background-color: var(--accent-color);
+            color: white;
+            font-weight: 600;
+        }
+        
+        .tour-table tr:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+            cursor: pointer;
+        }
+        
+        .tour-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .tour-name {
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+        
+        .past-tours {
+            background-color: var(--secondary-color);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .past-tours p {
+            margin-bottom: 1rem;
+        }
+        
+        .past-tours ul {
+            list-style-position: inside;
+            margin-left: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .past-tours li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .tour-highlight {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            margin: 0.2rem 0;
+            font-size: 0.9rem;
+        }
+        
+        .toggle-btn {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+        
+        .toggle-btn:hover {
+            background-color: var(--hover-color);
+        }
+        
+        .tour-section {
+            transition: opacity 0.5s ease;
+        }
+        
+        footer {
+            background-color: #111;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .social-icons {
+            margin-bottom: 1rem;
+        }
+        
+        .social-icons a {
+            color: var(--text-color);
+            font-size: 1.5rem;
+            margin: 0 0.5rem;
+            transition: color 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            color: var(--accent-color);
+        }
+        
+        .footer-links {
+            margin-bottom: 1rem;
+        }
+        
+        .footer-links a {
+            color: var(--text-color);
+            margin: 0 0.5rem;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+        
+        .copyright {
+            font-size: 0.9rem;
+            color: #777;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            nav ul {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background-color: rgba(0, 0, 0, 0.9);
+                padding: 1rem 0;
+            }
+            
+            nav ul.show {
+                display: flex;
+            }
+            
+            nav ul li {
+                margin: 0.5rem 0;
+                text-align: center;
+            }
+            
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            .tour-table {
+                font-size: 0.9rem;
+            }
+            
+            .tour-table th, .tour-table td {
+                padding: 0.7rem;
+            }
+            
+            .tour-table-container {
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">ONE OK ROCK</a>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
+                <nav>
+                    <ul id="navMenu">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="discography.html">Discography</a></li>
+                        <li><a href="members.html">Members</a></li>
+                        <li><a href="tours.html" class="active">Tours</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div class="hero">
+        <div class="hero-content">
+            <h1>ONE OK ROCK - Tours</h1>
+            <p>Experience the energy and passion of ONE OK ROCK live performances around the world</p>
+        </div>
+    </div>
+
+    <main class="container">
+        <div class="tour-controls">
+            <button class="toggle-btn" id="upcomingBtn">Upcoming Tours</button>
+            <button class="toggle-btn" id="pastBtn">Past Tours</button>
+        </div>
+        
+        <section id="upcoming-tours" class="tour-section">
+            <h2>Upcoming Tours</h2>
+            
+            <div class="tour-table-container">
+                <table class="tour-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Venue</th>
+                            <th>City</th>
+                            <th>Tour Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>August 16, 2025</td>
+                            <td>CRASUS DOME OITA</td>
+                            <td>Oita</td>
+                            <td class="tour-name">DETOX Japan Tour 2025</td>
+                        </tr>
+                        <tr>
+                            <td>August 17, 2025</td>
+                            <td>CRASUS DOME OITA</td>
+                            <td>Oita</td>
+                            <td class="tour-name">DETOX Japan Tour 2025</td>
+                        </tr>
+                        <tr>
+                            <td>August 30, 2025</td>
+                            <td>NISSAN STADIUM</td>
+                            <td>Yokohama</td>
+                            <td class="tour-name">DETOX Japan Tour 2025</td>
+                        </tr>
+                        <tr>
+                            <td>August 31, 2025</td>
+                            <td>NISSAN STADIUM</td>
+                            <td>Yokohama</td>
+                            <td class="tour-name">DETOX Japan Tour 2025</td>
+                        </tr>
+                        <tr>
+                            <td>September 6, 2025</td>
+                            <td>Daiwa House PREMIST DOME</td>
+                            <td>Sapporo</td>
+                            <td class="tour-name">DETOX Japan Tour 2025</td>
+                        </tr>
+                        <tr>
+                            <td>September 13, 2025</td>
+                            <td>YANMAR STADIUM NAGAI</td>
+                            <td>Higashisumiyoshi-ku</td>
+                            <td class="tour-name">DETOX Japan Tour 2025</td>
+                        </tr>
+                        <tr>
+                            <td>September 14, 2025</td>
+                            <td>YANMAR STADIUM NAGAI</td>
+                            <td>Higashisumiyoshi-ku</td>
+                            <td class="tour-name">DETOX Japan Tour 2025</td>
+                        </tr>
+                        <tr>
+                            <td>October 6, 2025</td>
+                            <td>Palacio Vistalegre</td>
+                            <td>Madrid</td>
+                            <td class="tour-name">DETOX European Tour 2025</td>
+                        </tr>
+                        <tr>
+                            <td>October 8, 2025</td>
+                            <td>Zenith Nantes</td>
+                            <td>Nantes</td>
+                            <td class="tour-name">DETOX European Tour 2025</td>
+                        </tr>
+                        <tr>
+                            <td>October 10, 2025</td>
+                            <td>Accor Arena</td>
+                            <td>Paris</td>
+                            <td class="tour-name">DETOX European Tour 2025</td>
+                        </tr>
+                        <tr>
+                            <td>October 11, 2025</td>
+                            <td>Zenith Strasbourg</td>
+                            <td>Strasbourg</td>
+                            <td class="tour-name">DETOX European Tour 2025</td>
+                        </tr>
+                        <tr>
+                            <td>October 13, 2025</td>
+                            <td>AO Arena</td>
+                            <td>Manchester</td>
+                            <td class="tour-name">DETOX European Tour 2025</td>
+                        </tr>
+                        <tr>
+                            <td>October 15, 2025</td>
+                            <td>The O2</td>
+                            <td>London</td>
+                            <td class="tour-name">DETOX European Tour 2025</td>
+                        </tr>
+                        <tr>
+                            <td>October 16, 2025</td>
+                            <td>Utilita Arena Cardiff</td>
+                            <td>Cardiff</td>
+                            <td class="tour-name">DETOX European Tour 2025</td>
+                        </tr>
+                        <tr>
+                            <td>October 20, 2025</td>
+                            <td>AFAS Live</td>
+                            <td>Amsterdam</td>
+                            <td class="tour-name">DETOX European Tour 2025</td>
+                        </tr>
+                        <tr>
+                            <td>October 21, 2025</td>
+                            <td>LANXESS arena</td>
+                            <td>Cologne</td>
+                            <td class="tour-name">DETOX European Tour 2025</td>
+                        </tr>
+                        <tr>
+                            <td>October 23, 2025</td>
+                            <td>Barclays Arena</td>
+                            <td>Hamburg</td>
+                            <td class="tour-name">DETOX European Tour 2025</td>
+                        </tr>
+                        <tr>
+                            <td>October 24, 2025</td>
+                            <td>Max-Schmeling-Halle</td>
+                            <td>Berlin</td>
+                            <td class="tour-name">DETOX European Tour 2025</td>
+                        </tr>
+                        <tr>
+                            <td>October 25, 2025</td>
+                            <td>Zenith</td>
+                            <td>Munich</td>
+                            <td class="tour-name">DETOX European Tour 2025</td>
+                        </tr>
+                        <tr>
+                            <td>October 27, 2025</td>
+                            <td>COS Torwar</td>
+                            <td>Warsaw</td>
+                            <td class="tour-name">DETOX European Tour 2025</td>
+                        </tr>
+                        <tr>
+                            <td>October 29, 2025</td>
+                            <td>Forum Karlín</td>
+                            <td>Prague</td>
+                            <td class="tour-name">DETOX European Tour 2025</td>
+                        </tr>
+                        <tr>
+                            <td>October 30, 2025</td>
+                            <td>Budapest Arena</td>
+                            <td>Budapest</td>
+                            <td class="tour-name">DETOX European Tour 2025</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="past-tours" class="tour-section" style="display: none;">
+            <h2>Past Notable Tours</h2>
+            
+            <div class="past-tours">
+                <p>ONE OK ROCK has an impressive history of touring globally, sharing stages with some of the biggest names in music and building a dedicated international fanbase.</p>
+                
+                <h3>Major Supporting Acts</h3>
+                <ul>
+                    <li>Ed Sheeran's <span class="tour-highlight">÷ (Divide) Tour</span> - Asia leg (2019)</li>
+                    <li>The Smashing Pumpkins' <span class="tour-highlight">Shiny and Oh So Bright Tour</span> (2018)</li>
+                    <li>5 Seconds of Summer's <span class="tour-highlight">Meet You There Tour</span> (2018)</li>
+                    <li>Linkin Park's <span class="tour-highlight">One More Light World Tour</span> (2017)</li>
+                </ul>
+                
+                <h3>Headline Tours</h3>
+                <ul>
+                    <li><span class="tour-highlight">Luxury Disease World Tour</span> (2022-2023)</li>
+                    <li><span class="tour-highlight">Eye of the Storm World Tour</span> (2019-2020)</li>
+                    <li><span class="tour-highlight">Ambitions World Tour</span> (2017-2018)</li>
+                    <li><span class="tour-highlight">35xxxv Tour</span> (2015-2016)</li>
+                </ul>
+                
+                <h3>Rurouni Kenshin Movie Tours</h3>
+                <p>ONE OK ROCK has a special connection with the Rurouni Kenshin live-action film series, providing theme songs for multiple films and performing special concerts to promote the movies:</p>
+                <ul>
+                    <li><span class="tour-highlight">Rurouni Kenshin Special Live</span> (2021) - Promoting "The Final/The Beginning"</li>
+                    <li><span class="tour-highlight">Rurouni Kenshin Concert Tour</span> (2014) - Promoting "Kyoto Inferno/The Legend Ends"</li>
+                </ul>
+                
+                <h3>Festival Appearances</h3>
+                <p>The band has performed at numerous major festivals worldwide, including:</p>
+                <ul>
+                    <li>Rock in Japan Festival</li>
+                    <li>Summer Sonic Festival</li>
+                    <li>Reading and Leeds Festivals (UK)</li>
+                    <li>Rock am Ring (Germany)</li>
+                    <li>Download Festival (UK)</li>
+                    <li>Warped Tour (USA)</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="social-icons">
+                <a href="#" aria-label="Facebook">📱</a>
+                <a href="#" aria-label="Twitter">🐦</a>
+                <a href="#" aria-label="Instagram">📷</a>
+                <a href="#" aria-label="YouTube">▶️</a>
+            </div>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact Us</a>
+                <a href="#">Fan Club</a>
+            </div>
+            <p class="copyright">© 2023 ONE OK ROCK Fan Site. This is an unofficial fan site.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navMenu = document.getElementById('navMenu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('show');
+        });
+        
+        // Tour section toggle
+        const upcomingBtn = document.getElementById('upcomingBtn');
+        const pastBtn = document.getElementById('pastBtn');
+        const upcomingTours = document.getElementById('upcoming-tours');
+        const pastTours = document.getElementById('past-tours');
+        
+        upcomingBtn.addEventListener('click', () => {
+            upcomingTours.style.display = 'block';
+            pastTours.style.display = 'none';
+            upcomingBtn.style.backgroundColor = 'var(--accent-color)';
+            pastBtn.style.backgroundColor = '#555';
+        });
+        
+        pastBtn.addEventListener('click', () => {
+            upcomingTours.style.display = 'none';
+            pastTours.style.display = 'block';
+            upcomingBtn.style.backgroundColor = '#555';
+            pastBtn.style.backgroundColor = 'var(--accent-color)';
+        });
+        
+        // Table row hover effect
+        const tableRows = document.querySelectorAll('.tour-table tbody tr');
+        tableRows.forEach(row => {
+            row.addEventListener('click', () => {
+                alert(`Event details for ${row.querySelector('td:first-child').textContent} at ${row.querySelector('td:nth-child(2)').textContent}`);
+            });
+        });
+        
+        // Initialize with upcoming tours visible
+        upcomingBtn.style.backgroundColor = 'var(--accent-color)';
+        pastBtn.style.backgroundColor = '#555';
+    </script>
+</body>
+</html>
