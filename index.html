@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>One Ok Rock - Official Fan Page</title>
+    <style>
+        :root {
+            --primary-color: #e63946;
+            --secondary-color: #1d3557;
+            --dark-bg: #121212;
+            --light-text: #f1faee;
+            --accent-color: #a8dadc;
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--light-text);
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: rgba(0, 0, 0, 0.8);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            top: 0;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            color: var(--light-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            bottom: -5px;
+            left: 0;
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+        
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background-color: var(--light-text);
+            margin: 5px;
+            transition: var(--transition);
+        }
+        
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://wallpapercave.com/wp/wp2465369.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-top: 80px;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+        
+        .btn:hover {
+            background-color: #c1121f;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            color: var(--accent-color);
+        }
+        
+        .band-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 30px;
+        }
+        
+        .info-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .info-text p {
+            margin-bottom: 20px;
+        }
+        
+        .info-image {
+            flex: 1;
+            min-width: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: var(--transition);
+        }
+        
+        .info-image:hover {
+            transform: scale(1.03);
+        }
+        
+        .info-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .achievements {
+            background-color: rgba(29, 53, 87, 0.2);
+            border-radius: 10px;
+            padding: 40px;
+        }
+        
+        .achievement-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .achievement-card {
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            padding: 25px;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        
+        .achievement-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            background-color: rgba(230, 57, 70, 0.1);
+        }
+        
+        .achievement-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .album-chart {
+            margin-top: 50px;
+        }
+        
+        .chart-container {
+            height: 300px;
+            position: relative;
+            margin-top: 30px;
+        }
+        
+        .chart-bar {
+            position: absolute;
+            bottom: 0;
+            width: 40px;
+            background: linear-gradient(to top, var(--primary-color), var(--accent-color));
+            border-radius: 5px 5px 0 0;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        
+        .chart-bar:hover {
+            filter: brightness(1.2);
+        }
+        
+        .chart-label {
+            position: absolute;
+            bottom: -30px;
+            text-align: center;
+            width: 80px;
+            font-size: 0.8rem;
+            transform: translateX(-20px);
+        }
+        
+        .latest-album {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 40px;
+            margin-top: 80px;
+        }
+        
+        .album-cover {
+            flex: 1;
+            min-width: 300px;
+            max-width: 400px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            transition: var(--transition);
+        }
+        
+        .album-cover:hover {
+            transform: rotate(3deg) scale(1.05);
+        }
+        
+        .album-cover img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .album-info {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .album-info h3 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .track-list {
+            list-style: none;
+            margin-top: 20px;
+        }
+        
+        .track-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            transition: var(--transition);
+        }
+        
+        .track-list li:hover {
+            padding-left: 10px;
+            color: var(--primary-color);
+        }
+        
+        footer {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--secondary-color);
+            color: var(--light-text);
+            margin: 0 10px;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-5px);
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            opacity: 0;
+            transition: var(--transition);
+            z-index: 999;
+        }
+        
+        .back-to-top.show {
+            opacity: 1;
+        }
+        
+        .back-to-top:hover {
+            background-color: #c1121f;
+            transform: translateY(-5px);
+        }
+        
+        @media screen and (max-width: 768px) {
+            .nav-links {
+                position: absolute;
+                right: 0;
+                top: 70px;
+                background-color: rgba(0, 0, 0, 0.9);
+                flex-direction: column;
+                width: 100%;
+                align-items: center;
+                transform: translateY(-150%);
+                transition: var(--transition);
+                padding: 20px 0;
+            }
+            
+            .nav-links.active {
+                transform: translateY(0);
+            }
+            
+            .nav-links li {
+                margin: 15px 0;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+            
+            .hamburger.active div:nth-child(1) {
+                transform: rotate(-45deg) translate(-5px, 6px);
+            }
+            
+            .hamburger.active div:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .hamburger.active div:nth-child(3) {
+                transform: rotate(45deg) translate(-5px, -6px);
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">ONE OK ROCK</a>
+                <ul class="nav-links">
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="discography.html">Discography</a></li>
+                    <li><a href="members.html">Members</a></li>
+                    <li><a href="tours.html">Tours</a></li>
+                    <li><a href="media.html">Media</a></li>
+                    <li><a href="about.html">About</a></li>
+                </ul>
+                <div class="hamburger">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>ONE OK ROCK</h1>
+            <p>Experience the energy and passion of Japan's most influential rock band</p>
+            <a href="#about" class="btn">Discover More</a>
+        </div>
+    </section>
+
+    <section id="about" class="container">
+        <div class="section-title">
+            <h2>About the Band</h2>
+            <p>The journey of ONE OK ROCK</p>
+        </div>
+        <div class="band-info">
+            <div class="info-text">
+                <p>Formed in Tokyo in 2005, ONE OK ROCK is a Japanese rock band known for their blend of alternative rock, emo, and post-hardcore. The current members are Taka (vocals), Toru (guitar), Ryota (bass), and Tomoya (drums).</p>
+                <p>Starting as a five-piece band, they've evolved into one of Japan's most internationally recognized rock acts. Their name comes from "one o'clock," the time they used to practice, but is deliberately spelled as "ONE OK ROCK" to represent their unique identity.</p>
+                <p>The band is known for their energetic live performances and Taka's ability to seamlessly switch between Japanese and English lyrics, helping them build a global fanbase beyond Japan's borders.</p>
+            </div>
+            <div class="info-image">
+                <img src="https://i.pinimg.com/originals/b3/fb/e1/b3fbe1f4b9ea0d95e1eb88f481117d82.jpg" alt="One Ok Rock band members">
+            </div>
+        </div>
+    </section>
+
+    <section class="container">
+        <div class="section-title">
+            <h2>Musical Journey</h2>
+            <p>Key achievements and evolution</p>
+        </div>
+        <div class="achievements">
+            <div class="achievement-grid">
+                <div class="achievement-card">
+                    <h3>International Recognition</h3>
+                    <p>With albums like 'Jinsei×Boku=', ONE OK ROCK gained significant international attention, leading to worldwide tours and collaborations with global artists.</p>
+                </div>
+                <div class="achievement-card">
+                    <h3>Global Tours</h3>
+                    <p>The band has performed sold-out shows across Asia, North America, Europe, and Australia, showcasing their universal appeal.</p>
+                </div>
+                <div class="achievement-card">
+                    <h3>Musical Evolution</h3>
+                    <p>From their early post-hardcore sound to a more polished alternative rock style, ONE OK ROCK has continuously evolved while maintaining their distinctive energy.</p>
+                </div>
+            </div>
+            
+            <div class="album-chart">
+                <h3>Album Popularity</h3>
+                <div class="chart-container">
+                    <div class="chart-bar" style="height: 60%; left: 5%;">
+                        <div class="chart-label">Zeitakubyō (2010)</div>
+                    </div>
+                    <div class="chart-bar" style="height: 75%; left: 20%;">
+                        <div class="chart-label">Jinsei×Boku= (2013)</div>
+                    </div>
+                    <div class="chart-bar" style="height: 85%; left: 35%;">
+                        <div class="chart-label">35xxxv (2015)</div>
+                    </div>
+                    <div class="chart-bar" style="height: 80%; left: 50%;">
+                        <div class="chart-label">Ambitions (2017)</div>
+                    </div>
+                    <div class="chart-bar" style="height: 70%; left: 65%;">
+                        <div class="chart-label">Eye of the Storm (2019)</div>
+                    </div>
+                    <div class="chart-bar" style="height: 90%; left: 80%;">
+                        <div class="chart-label">Luxury Disease (2022)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="latest-album">
+            <div class="album-cover">
+                <img src="https://i.scdn.co/image/ab67616d0000b273c5938d95f0efb7316fe3fb21" alt="Luxury Disease Album Cover">
+            </div>
+            <div class="album-info">
+                <h3>Latest Album: Luxury Disease (2022)</h3>
+                <p>Released on September 9, 2022, "Luxury Disease" marks ONE OK ROCK's return to their rock roots while incorporating new elements into their sound. The album features hit singles like "Save Yourself" and "Wonder".</p>
+                <p>The album showcases the band's maturity and musical growth, receiving critical acclaim for its powerful compositions and Taka's vocal performance.</p>
+                <ul class="track-list">
+                    <li><span>1. Save Yourself</span> <span>3:52</span></li>
+                    <li><span>2. Wonder</span> <span>3:36</span></li>
+                    <li><span>3. Let Me Let You Go</span> <span>3:45</span></li>
+                    <li><span>4. So Far Gone</span> <span>3:38</span></li>
+                    <li><span>5. When They Turn The Lights On</span> <span>3:25</span></li>
+                </ul>
+                <a href="#" class="btn" style="margin-top: 20px;">Listen Now</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f">f</i></a>
+                <a href="#"><i class="fab fa-twitter">t</i></a>
+                <a href="#"><i class="fab fa-instagram">i</i></a>
+                <a href="#"><i class="fab fa-youtube">y</i></a>
+                <a href="#"><i class="fab fa-spotify">s</i></a>
+            </div>
+            <p>&copy; 2023 ONE OK ROCK Fan Page. This is an unofficial fan site.</p>
+        </div>
+    </footer>
+
+    <a href="#" class="back-to-top">↑</a>
+
+    <script>
+        // Mobile Navigation Toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+        
+        // Back to top button
+        const backToTopButton = document.querySelector('.back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('show');
+            } else {
+                backToTopButton.classList.remove('show');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        
+        // Animate chart bars on scroll
+        const chartBars = document.querySelectorAll('.chart-bar');
+        
+        function animateChartBars() {
+            const chartContainer = document.querySelector('.chart-container');
+            if (!chartContainer) return;
+            
+            const chartPosition = chartContainer.getBoundingClientRect().top;
+            const screenPosition = window.innerHeight / 1.3;
+            
+            if (chartPosition < screenPosition) {
+                chartBars.forEach((bar, index) => {
+                    setTimeout(() => {
+                        bar.style.height = bar.style.height;
+                        bar.style.opacity = '1';
+                    }, index * 100);
+                });
+                window.removeEventListener('scroll', animateChartBars);
+            }
+        }
+        
+        window.addEventListener('scroll', animateChartBars);
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
